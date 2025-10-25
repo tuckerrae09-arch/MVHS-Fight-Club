@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MVHS Fight Club — Events & Scheduling</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="logo.png" alt="MVHS Fight Club logo" id="logo" />
+      <div class="brand-text">
+        <h1>MVHS Fight Club</h1>
+        <p class="tag">Organize fights • Schedule meets • Manage fighters</p>
+      </div>
+    </div>
+    <nav>
+      <button id="btn-show-events" class="nav-btn active">Events</button>
+      <button id="btn-register" class="nav-btn">Register</button>
+      <button id="btn-schedule" class="nav-btn">Schedule</button>
+      <button id="btn-admin" class="nav-btn">Admin</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Events -->
+    <section id="events-section" class="panel">
+      <div class="panel-header">
+        <h2>Upcoming Events</h2>
+        <button id="create-event-btn" class="primary">Create Event</button>
+      </div>
+      <div id="events-list" class="card-list"></div>
+    </section>
+
+    <!-- Registration -->
+    <section id="register-section" class="panel hidden">
+      <h2>Fighter Registration</h2>
+      <form id="register-form" class="card form-card">
+        <label>
+          Fighter Name
+          <input type="text" id="fighter-name" required />
+        </label>
+        <label>
+          Weight / Division
+          <input type="text" id="fighter-division" placeholder="e.g. 145 lb / Lightweight" />
+        </label>
+        <label>
+          Contact Email
+          <input type="email" id="fighter-email" />
+        </label>
+        <label>
+          Availability (comma separated dates, YYYY-MM-DD)
+          <input type="text" id="fighter-availability" placeholder="2025-11-20,2025-11-21" />
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="primary">Register</button>
+          <button type="button" id="reset-register" class="ghost">Reset</button>
+        </div>
+      </form>
+
+      <h3>Registered Fighters</h3>
+      <div id="fighters-list" class="card-list"></div>
+    </section>
+
+    <!-- Scheduling -->
+    <section id="schedule-section" class="panel hidden">
+      <div class="panel-header">
+        <h2>Schedule Builder</h2>
+        <div class="small">Select event, assign fighters to matchups, or auto-generate.</div>
+      </div>
+
+      <div class="card">
+        <label>
+          Select Event
+          <select id="select-event"></select>
+        </label>
+
+        <div class="grid-2">
+          <div>
+            <h4>Available Fighters</h4>
+            <div id="available-fighters" class="list"></div>
+          </div>
+          <div>
+            <h4>Matchups</h4>
+            <div id="matchups" class="list"></div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button id="auto-generate" class="primary">Auto Generate Matchups</button>
+          <button id="save-schedule" class="primary">Save Schedule</button>
+        </div>
+      </div>
+
+      <h3>Event Schedule Preview</h3>
+      <div id="schedule-preview" class="card-list"></div>
+    </section>
+
+    <!-- Admin -->
+    <section id="admin-section" class="panel hidden">
+      <h2>Admin Dashboard</h2>
+      <div class="card">
+        <label>Admin Password
+          <input id="admin-pass" type="password" placeholder="type 'mvhsadmin' to unlock" />
+        </label>
+        <div class="form-actions">
+          <button id="unlock-admin" class="primary">Unlock</button>
+          <button id="clear-data" class="danger">Clear All Data</button>
+        </div>
+        <div id="admin-tools" class="hidden">
+          <h3>Admin Tools</h3>
+          <button id="export-data" class="primary">Export Data (JSON)</button>
+          <button id="import-data" class="ghost">Import Data</button>
+          <input id="import-file" type="file" accept=".json" style="display:none" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Event modal (simple) -->
+  <div id="modal" class="modal hidden" role="dialog" aria-hidden="true">
+    <div class="modal-content card">
+      <h3 id="modal-title">Create Event</h3>
+      <form id="modal-form">
+        <label>
+          Event Title
+          <input id="event-title" required />
+        </label>
+        <label>
+          Date
+          <input id="event-date" type="date" required />
+        </label>
+        <label>
+          Location
+          <input id="event-location" placeholder="Gym name / Address" />
+        </label>
+        <label>
+          Notes
+          <textarea id="event-notes" rows="3"></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="primary">Save</button>
+          <button type="button" id="modal-cancel" class="ghost">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>MVHS Fight Club • Built for organizing meets & scheduling fighters</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
